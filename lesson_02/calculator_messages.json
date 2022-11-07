@@ -1,3 +1,5 @@
+// json file for i18n
+
 {
 	"en": {
 		"welcome": "Welcome to the Calculator!",
