@@ -4,8 +4,11 @@
 // perform the operation
 // display the result of the operation 
 
-// TESTING Git
+const LANGUAGE = 'en';
+
 const readline = require('readline-sync');
+
+const MESSAGES = require('./calculator_messages.json');
 
 function prompt(msg) {
   console.log(`=> ${msg}`);
@@ -14,36 +17,42 @@ function prompt(msg) {
 function invalidNumber(num) {
   return num.trimStart() === '' || Number.isNaN(Number(num));
 }
-prompt('Welcome to the Calculator!');
+
+function messages(message,lang='en') {
+  return MESSAGES[lang][message];
+}
+
+prompt(messages('welcome','fr'));
+
 calculator();
 
 function onceAgain() {
-  prompt('Great, let\'s play again!');
+  prompt(messages('again','fr'));
   calculator();
 }
 
 function calculator() {
-  prompt('What is the first number?');
+  prompt(messages('firstNum', 'fr'));
   let number1 = readline.question();
 
   while (invalidNumber(number1)) {
-    prompt('Hmmm... that doesn\'t look like a valid number.');
+    prompt(messages('incorrect','fr'));
     number1 = readline.question();
   }
 
-  prompt('What is the second number?');
+  prompt(messages('secondNum', 'fr'));
   let number2 = readline.question();
 
   while (invalidNumber(number2)) {
-    prompt('Hmmm... that doesn\'t look like a valid number.');
+    prompt(messages('incorrect','fr'));
     number2 = readline.question();
   }
 
-  prompt('What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide');
+  prompt(messages('operationAsk','fr'));
   let operation = readline.question();
 
   while (!['1', '2', '3', '4'].includes(operation)) {
-    prompt('Must choose either 1, 2, 3, or 4.');
+    prompt(messages('mustChoose1','fr'));
     operation = readline.question();
   }
 
@@ -63,19 +72,19 @@ function calculator() {
       output = +number1 / +number2;
       break;
   }
-  prompt(`The result is ${output}.`);
+  prompt(`The result is ${output}`);
 
-  prompt('Would you like to play again?\n1) Yes 2) No');
+  prompt(messages('askToPlay','fr'));
   let playAgain = readline.question();
 
   while (!['1', '2'].includes(playAgain)) {
-    prompt('Must choose either 1 or 2.');
+    prompt(messages('mustChoose2','fr'));
     playAgain = readline.question()
   }
 
   if (playAgain === '1') {
     onceAgain(); 
   } else {
-    prompt('Thank you for playing!');
+    prompt(messages('thankYou','fr'));
   }
 }
