@@ -28,7 +28,7 @@ function onceAgain() {
 }
 
 function calculator() {
-  prompt(messages('firstNum', 'fr'));
+  prompt(messages('firstNum','fr'));
   let number1 = readline.question();
 
   while (invalidNumber(number1)) {
