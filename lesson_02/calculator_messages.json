@@ -1,7 +1,8 @@
 {
+	"preferredLang": "Pick your language!\n1) English 2) French ",
+	"validLang": "Please select between:\n1) English 2) French",
 	"en": {
 		"welcome": "Welcome to the Calculator!",
-		"language": "Pick your language!\n1) English 2) French ",
 		"again": "Great, let's play again!",
 		"firstNum": "What is the first number?",
 		"incorrect": "Hmmm... that doesn't look like a valid number.",
@@ -10,11 +11,11 @@
 		"mustChoose1": "Must choose either 1, 2, 3, or 4.",
 		"mustChoose2": "Must choose either 1 or 2",
 		"askToPlay": "Would you like to play again?\n1) Yes 2) No",
-		"thankYou": "Thank you for playing."
+		"thankYou": "Thank you for playing.",
+		"result": "The result is "
 	},
 	"fr": {
 		"welcome": "Bienvenue dans le Calculateur !",
-		"language": "Choisissez votre langue !\n1) anglais 2) français ",
 		"again": "Super, rejouons !",
 		"firstNum": "Quel est le premier numéro ?",
 		"incorrect": "Hmmm... ça ne ressemble pas à un numéro valide.",
@@ -23,6 +24,7 @@
 		"mustChoose1": "Vous devez choisir 1, 2, 3 ou 4.",
 		"mustChoose2": "Vous devez choisir 1 ou 2",
 		"askToPlay": "Souhaitez-vous rejoue ?\n1) Oui 2) Non",
-		"thankYou": "Merci d'avoir joué."
+		"thankYou": "Merci d'avoir joué.",
+		"result": "le résultat est "
 	}
 }
