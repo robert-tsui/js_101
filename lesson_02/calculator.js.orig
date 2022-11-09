@@ -4,17 +4,17 @@
 // perform the operation
 // display the result of the operation
 
-const readline = require("readline-sync");
-const MESSAGES = require("./calculator_messages.json");
+const readline = require('readline-sync');
+const MESSAGES = require('./calculator_messages.json');
 prompt(MESSAGES.preferredLang);
 let selectedLanguage;
 let lang1 = readline.question();
 
 function checkLanguage(language) {
-  if (lang1 === "1") {
-    selectedLanguage = "en";
-  } else if (lang1 === "2") {
-    selectedLanguage = "fr";
+  if (lang1 === '1') {
+    selectedLanguage = 'en';
+  } else if (lang1 === '2') {
+    selectedLanguage = 'fr';
   }
 }
 
@@ -22,12 +22,12 @@ function prompt(msg) {
   console.log(`=> ${msg}`);
 }
 
-function messages(message, lang = "en") {
+function messages(message, lang = 'en') {
   return MESSAGES[lang][message];
 }
 
 function invalidNumber(num) {
-  return num.trimStart() === "" || Number.isNaN(Number(num));
+  return num.trimStart() === '' || Number.isNaN(Number(num));
 }
 
 checkLanguage(lang1);
@@ -43,12 +43,12 @@ let askToPlay = MESSAGES[selectedLanguage].askToPlay;
 let thankYou = MESSAGES[selectedLanguage].thankYou;
 let result = MESSAGES[selectedLanguage].result;
 
-prompt(welcome);
+prompt(welcome)
 calculator();
 
 function onceAgain() {
   prompt(again);
-  calculator();
+  calculator()
 }
 
 function calculator() {
@@ -58,51 +58,60 @@ function calculator() {
     prompt(incorrect);
     number1 = readline.question();
   }
-
-  prompt(messages("secondNum", "fr"));
+<<<<<<< HEAD
+  prompt(messages('secondNum','fr'));
+=======
 
   prompt(secondNum);
+>>>>>>> development
   let number2 = readline.question();
   while (invalidNumber(number2)) {
     prompt(incorrect);
     number2 = readline.question();
   }
-  prompt(messages("operationAsk", "fr"));
+<<<<<<< HEAD
+  prompt(messages('operationAsk','fr'));
+=======
 
   prompt(operationAsk);
+>>>>>>> development
   let operation = readline.question();
-  while (!["1", "2", "3", "4"].includes(operation)) {
+  while (!['1', '2', '3', '4'].includes(operation)) {
     prompt(mustChoose1);
     operation = readline.question();
   }
   let output;
   switch (operation) {
-    case "1":
+    case '1':
       output = +number1 + +number2;
       break;
-    case "2":
+    case '2':
       output = +number1 - +number2;
       break;
-    case "3":
+    case '3':
       output = +number1 * +number2;
       break;
-    case "4":
+    case '4':
       output = +number1 / +number2;
       break;
   }
+<<<<<<< HEAD
   prompt(`The result is ${output}.`);
-  prompt(messages("askToPlay", "fr"));
-  prompt(result + output);
+  prompt(messages('askToPlay','fr'));
+=======
+  prompt(result+output);
 
   prompt(askToPlay);
+>>>>>>> development
   let playAgain = readline.question();
-  while (!["1", "2"].includes(playAgain)) {
+  while (!['1', '2'].includes(playAgain)) {
     prompt(mustChoose2);
-    playAgain = readline.question();
+    playAgain = readline.question()
   }
-  if (playAgain === "1") {
+  if (playAgain === '1') {
     onceAgain();
   } else {
     prompt(thankYou);
   }
 }
+
