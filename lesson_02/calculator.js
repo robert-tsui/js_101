@@ -6,6 +6,17 @@
 
 const readline = require('readline-sync');
 const MESSAGES = require('./calculator_messages.json');
+prompt(MESSAGES.preferredLang);
+let selectedLanguage;
+let lang1 = readline.question();
+
+function checkLanguage(language) {
+  if (lang1 === '1') {
+    selectedLanguage = 'en';
+  } else if (lang1 === '2') {
+    selectedLanguage = 'fr';
+  }
+}
 
 function prompt(msg) {
   console.log(`=> ${msg}`);
@@ -18,31 +29,55 @@ function messages(message, lang = 'en') {
 function invalidNumber(num) {
   return num.trimStart() === '' || Number.isNaN(Number(num));
 }
-prompt(messages('welcome','fr'));
+
+checkLanguage(lang1);
+let welcome = MESSAGES[selectedLanguage].welcome;
+let again = MESSAGES[selectedLanguage].again;
+let firstNum = MESSAGES[selectedLanguage].firstNum;
+let incorrect = MESSAGES[selectedLanguage].incorrect;
+let secondNum = MESSAGES[selectedLanguage].secondNum;
+let operationAsk = MESSAGES[selectedLanguage].operationAsk;
+let mustChoose1 = MESSAGES[selectedLanguage].mustChoose1;
+let mustChoose2 = MESSAGES[selectedLanguage].mustChoose2;
+let askToPlay = MESSAGES[selectedLanguage].askToPlay;
+let thankYou = MESSAGES[selectedLanguage].thankYou;
+let result = MESSAGES[selectedLanguage].result;
+
+prompt(welcome)
 calculator();
 
 function onceAgain() {
-  prompt(messages('again','fr'));
-  calculator();
+  prompt(again);
+  calculator()
 }
 
 function calculator() {
-  prompt(messages('firstNum','fr'));
+  prompt(firstNum);
   let number1 = readline.question();
   while (invalidNumber(number1)) {
-    prompt(messages('incorrect','fr'));
+    prompt(incorrect);
     number1 = readline.question();
   }
+<<<<<<< HEAD
   prompt(messages('secondNum','fr'));
+=======
+
+  prompt(secondNum);
+>>>>>>> development
   let number2 = readline.question();
   while (invalidNumber(number2)) {
-    prompt(messages('incorrect','fr'));
+    prompt(incorrect);
     number2 = readline.question();
   }
+<<<<<<< HEAD
   prompt(messages('operationAsk','fr'));
+=======
+
+  prompt(operationAsk);
+>>>>>>> development
   let operation = readline.question();
   while (!['1', '2', '3', '4'].includes(operation)) {
-    prompt(messages('mustChoose1','fr'));
+    prompt(mustChoose1);
     operation = readline.question();
   }
   let output;
@@ -60,17 +95,23 @@ function calculator() {
       output = +number1 / +number2;
       break;
   }
+<<<<<<< HEAD
   prompt(`The result is ${output}.`);
   prompt(messages('askToPlay','fr'));
+=======
+  prompt(result+output);
+
+  prompt(askToPlay);
+>>>>>>> development
   let playAgain = readline.question();
   while (!['1', '2'].includes(playAgain)) {
-    prompt(messages('mustChoose2','fr'));
+    prompt(mustChoose2);
     playAgain = readline.question()
   }
   if (playAgain === '1') {
     onceAgain();
   } else {
-    prompt(messages('thankYou','fr'));
+    prompt(thankYou);
   }
 }
 
