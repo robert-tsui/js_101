@@ -46,11 +46,6 @@ let result = MESSAGES[selectedLanguage].result;
 prompt(welcome);
 calculator();
 
-function onceAgain() {
-  prompt(again);
-  calculator();
-}
-
 function calculator() {
   prompt(firstNum);
   let number1 = readline.question();
@@ -58,17 +53,12 @@ function calculator() {
     prompt(incorrect);
     number1 = readline.question();
   }
-
-  prompt(messages("secondNum", "fr"));
-
   prompt(secondNum);
   let number2 = readline.question();
   while (invalidNumber(number2)) {
     prompt(incorrect);
     number2 = readline.question();
   }
-  prompt(messages("operationAsk", "fr"));
-
   prompt(operationAsk);
   let operation = readline.question();
   while (!["1", "2", "3", "4"].includes(operation)) {
@@ -90,11 +80,8 @@ function calculator() {
       output = +number1 / +number2;
       break;
   }
-  prompt(`The result is ${output}.`);
-  prompt(messages("askToPlay", "fr"));
-  prompt(result + output);
-
   prompt(askToPlay);
+  prompt(result + output);
   let playAgain = readline.question();
   while (!["1", "2"].includes(playAgain)) {
     prompt(mustChoose2);
@@ -105,4 +92,9 @@ function calculator() {
   } else {
     prompt(thankYou);
   }
+}
+
+function onceAgain() {
+  prompt(again);
+  calculator();
 }
