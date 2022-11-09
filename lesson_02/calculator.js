@@ -10,7 +10,7 @@ prompt(MESSAGES.preferredLang);
 let selectedLanguage;
 let lang1 = readline.question();
 
-function checkLanguage(language) {
+function checkLanguage(lang1) {
   if (lang1 === "1") {
     selectedLanguage = "en";
   } else if (lang1 === "2") {
