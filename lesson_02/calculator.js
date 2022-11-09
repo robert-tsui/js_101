@@ -22,10 +22,6 @@ function prompt(msg) {
   console.log(`=> ${msg}`);
 }
 
-function messages(message, lang = "en") {
-  return MESSAGES[lang][message];
-}
-
 function invalidNumber(num) {
   return num.trimStart() === "" || Number.isNaN(Number(num));
 }
@@ -44,28 +40,45 @@ let thankYou = MESSAGES[selectedLanguage].thankYou;
 let result = MESSAGES[selectedLanguage].result;
 
 prompt(welcome);
-calculator();
-
-function calculator() {
+numOne();
+function numOne() {
   prompt(firstNum);
   let number1 = readline.question();
   while (invalidNumber(number1)) {
     prompt(incorrect);
     number1 = readline.question();
   }
+  console.log("number1: ", number1);
+  return number1;
+}
+numTwo();
+function numTwo() {
   prompt(secondNum);
   let number2 = readline.question();
   while (invalidNumber(number2)) {
     prompt(incorrect);
     number2 = readline.question();
   }
+  console.log("number2: ", number2);
+  return number2;
+}
+getOperation();
+function getOperation() {
   prompt(operationAsk);
   let operation = readline.question();
   while (!["1", "2", "3", "4"].includes(operation)) {
     prompt(mustChoose1);
     operation = readline.question();
   }
-  let output;
+  console.log("operation: ", operation);
+  return operation;
+}
+let output;
+calculate();
+function calculate(number1, number2, operation) {
+  console.log("number1: ", number1);
+  console.log("number2: ", number2);
+  console.log("operation: ", operation);
   switch (operation) {
     case "1":
       output = +number1 + +number2;
@@ -80,8 +93,13 @@ function calculator() {
       output = +number1 / +number2;
       break;
   }
+  console.log("output: ", output);
+  return output;
+}
+prompt(result + output);
+playAgain();
+function playAgain() {
   prompt(askToPlay);
-  prompt(result + output);
   let playAgain = readline.question();
   while (!["1", "2"].includes(playAgain)) {
     prompt(mustChoose2);
@@ -96,5 +114,5 @@ function calculator() {
 
 function onceAgain() {
   prompt(again);
-  calculator();
+  numOne();
 }
