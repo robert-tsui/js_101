@@ -38,81 +38,68 @@ let mustChoose2 = MESSAGES[selectedLanguage].mustChoose2;
 let askToPlay = MESSAGES[selectedLanguage].askToPlay;
 let thankYou = MESSAGES[selectedLanguage].thankYou;
 let result = MESSAGES[selectedLanguage].result;
+let output;
+let number1;
+let number2;
+let operation;
 
 prompt(welcome);
-numOne();
-function numOne() {
-  prompt(firstNum);
-  let number1 = readline.question();
-  while (invalidNumber(number1)) {
-    prompt(incorrect);
+while (true) {
+  numOne();
+  function numOne() {
+    prompt(firstNum);
     number1 = readline.question();
+    while (invalidNumber(number1)) {
+      prompt(incorrect);
+      number1 = readline.question();
+    }
+    return number1;
   }
-  console.log("number1: ", number1);
-  return number1;
-}
-numTwo();
-function numTwo() {
-  prompt(secondNum);
-  let number2 = readline.question();
-  while (invalidNumber(number2)) {
-    prompt(incorrect);
+  numTwo();
+  function numTwo() {
+    prompt(secondNum);
     number2 = readline.question();
+    while (invalidNumber(number2)) {
+      prompt(incorrect);
+      number2 = readline.question();
+    }
+    return number2;
   }
-  console.log("number2: ", number2);
-  return number2;
-}
-getOperation();
-function getOperation() {
-  prompt(operationAsk);
-  let operation = readline.question();
-  while (!["1", "2", "3", "4"].includes(operation)) {
-    prompt(mustChoose1);
+  getOperation();
+  function getOperation() {
+    prompt(operationAsk);
     operation = readline.question();
+    while (!["1", "2", "3", "4"].includes(operation)) {
+      prompt(mustChoose1);
+      operation = readline.question();
+    }
+    return operation;
   }
-  console.log("operation: ", operation);
-  return operation;
-}
-let output;
-calculate();
-function calculate(number1, number2, operation) {
-  console.log("number1: ", number1);
-  console.log("number2: ", number2);
-  console.log("operation: ", operation);
-  switch (operation) {
-    case "1":
-      output = +number1 + +number2;
-      break;
-    case "2":
-      output = +number1 - +number2;
-      break;
-    case "3":
-      output = +number1 * +number2;
-      break;
-    case "4":
-      output = +number1 / +number2;
-      break;
+  calculate(number1, number2, operation);
+  function calculate(number1, number2, operation) {
+    switch (operation) {
+      case "1":
+        output = +number1 + +number2;
+        break;
+      case "2":
+        output = +number1 - +number2;
+        break;
+      case "3":
+        output = +number1 * +number2;
+        break;
+      case "4":
+        output = +number1 / +number2;
+        break;
+    }
+    return output;
   }
-  console.log("output: ", output);
-  return output;
-}
-prompt(result + output);
-playAgain();
-function playAgain() {
+  prompt(result + output);
+
   prompt(askToPlay);
   let playAgain = readline.question();
-  while (!["1", "2"].includes(playAgain)) {
-    prompt(mustChoose2);
-    playAgain = readline.question();
-  }
-  if (playAgain === "1") {
-    onceAgain();
-  } else {
-    prompt(thankYou);
-  }
-}
 
-function onceAgain() {
-  prompt(again);
-  numOne();
+  if (playAgain !== "1") {
+    prompt(thankYou);
+    break;
+  }
 }
