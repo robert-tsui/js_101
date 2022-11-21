@@ -102,4 +102,8 @@ while (true) {
     prompt(thankYou);
     break;
   }
+
+  if (playAgain === "1") {
+    prompt(again);
+  }
 }

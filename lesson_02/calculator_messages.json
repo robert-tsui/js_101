@@ -12,7 +12,11 @@
 		"mustChoose2": "Must choose either 1 or 2",
 		"askToPlay": "Would you like to play again?\n1) Yes 2) No",
 		"thankYou": "Thank you for playing.",
-		"result": "The result is "
+		"result": "The result is ",
+		"loanAmount": "What is the loan amount?",
+		"APR": "What is the annual percentage rate?",
+		"loanDuration": "What is the loan duration in years?",
+		"monthyPayment": "Your monthly payment is "
 	},
 	"fr": {
 		"welcome": "Bienvenue dans le Calculateur !",
