@@ -72,7 +72,7 @@ function calculate(number1, number2, operation) {
       output = +number1 * +number2;
       break;
     case "4":
-      if (number2 === 0) {
+      if (+number2 === 0) {
         output = "false";
       } else {
         output = +number1 / +number2;
@@ -116,14 +116,8 @@ while (true) {
     prompt(thankYou);
     break;
   }
-<<<<<<< HEAD
-
-  if (playAgain === "1") {
-    prompt(again);
-=======
   if (playAgain === "1") {
     prompt(again);
     console.clear();
->>>>>>> development
   }
 }

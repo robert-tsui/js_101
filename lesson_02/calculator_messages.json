@@ -16,7 +16,10 @@
 		"loanAmount": "What is the loan amount?",
 		"APR": "What is the annual percentage rate?",
 		"loanDuration": "What is the loan duration in years?",
-		"monthyPayment": "Your monthly payment is "
+		"monthlyPayment": "Your monthly payment is ",
+		"calculateAgain": "Would you like to calculate another mortgage payment?\n1) Yes 2) No",
+		"again2": "Great, let's do another one!",
+		"thankYou2": "Thank you for using our mortgage calculator!"
 	},
 	"fr": {
 		"welcome": "Bienvenue dans le Calculateur !",
