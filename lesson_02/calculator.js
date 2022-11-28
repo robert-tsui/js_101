@@ -4,8 +4,8 @@
 // perform the operation
 // display the result of the operation
 
-const readline = require("readline-sync");
-const MESSAGES = require("./calculator_messages.json");
+const readline = require('readline-sync');
+const MESSAGES = require('./calculator_messages.json');
 prompt(MESSAGES.preferredLang);
 let selectedLanguage;
 let lang1 = readline.question();
@@ -15,14 +15,14 @@ function prompt(msg) {
 }
 
 function invalidNumber(num) {
-  return num.trimStart() === "" || Number.isNaN(Number(num));
+  return num.trimStart() === '' || Number.isNaN(Number(num));
 }
 
 function checkLanguage(lang1) {
-  if (lang1 === "1") {
-    selectedLanguage = "en";
-  } else if (lang1 === "2") {
-    selectedLanguage = "fr";
+  if (lang1 === '1') {
+    selectedLanguage = 'en';
+  } else if (lang1 === '2') {
+    selectedLanguage = 'fr';
   } else {
     prompt(MESSAGES.validLang);
     lang1 = readline.question();
@@ -53,7 +53,7 @@ function getSecondNumber() {
 function getOperation() {
   prompt(operationAsk);
   operation = readline.question();
-  while (!["1", "2", "3", "4"].includes(operation)) {
+  while (!['1', '2', '3', '4'].includes(operation)) {
     prompt(mustChoose1);
     operation = readline.question();
   }
@@ -62,18 +62,18 @@ function getOperation() {
 
 function calculate(number1, number2, operation) {
   switch (operation) {
-    case "1":
+    case '1':
       output = +number1 + +number2;
       break;
-    case "2":
+    case '2':
       output = +number1 - +number2;
       break;
-    case "3":
+    case '3':
       output = +number1 * +number2;
       break;
-    case "4":
+    case '4':
       if (+number2 === 0) {
-        output = "false";
+        output = 'false';
       } else {
         output = +number1 / +number2;
         break;
@@ -108,15 +108,15 @@ while (true) {
   prompt(result + output);
   prompt(askToPlay);
   let playAgain = readline.question();
-  while (!["1", "2"].includes(playAgain)) {
+  while (!['1', '2'].includes(playAgain)) {
     prompt(mustChoose2);
     playAgain = readline.question();
   }
-  if (playAgain !== "1") {
+  if (playAgain !== '1') {
     prompt(thankYou);
     break;
   }
-  if (playAgain === "1") {
+  if (playAgain === '1') {
     prompt(again);
     console.clear();
   }
