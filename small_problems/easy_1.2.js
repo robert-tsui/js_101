@@ -29,7 +29,7 @@ o: 1,3,5,7,9,11
 DATA STRUCTURE/ALGORITHM
 
 1. Write a for loop that initializes i at 1 and increments i by 2 until i = 99
-2. Print the value of i to the console
+2. Print the value of i to the console, each to a separate line
 
 */
 
