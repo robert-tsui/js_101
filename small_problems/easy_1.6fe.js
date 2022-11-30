@@ -43,6 +43,7 @@ DATA STRUCTURE/ALGORITHM
 
 function calculateSum(inputArray) {
   let total = 0;
+  console.log(`getArray: ${getArray}`);
   let highestNum = inputArray.reduce((a, b) => Math.max(a, b), -Infinity);
   for (let i = 1; i <= highestNum; i++) {
     total += i;
@@ -66,10 +67,9 @@ function calculateProduct(inputArray) {
 }
 
 let readlineSync = require(`readline-sync`);
-let getArray = Array.from(
-  readlineSync.question(`Please enter an array of integers:\n`)
-);
-console.log(typeof inputArray);
+let getArray = readlineSync.question(`Please enter an array of integers:\n`);
+console.log(typeof getArray);
+console.log(`getArray: ${getArray}`);
 let getOperand = readlineSync.question(
   `Enter "s" to compute the sum, or "p" to compute the product between 1 and the maximum element in your array.\n`
 );
