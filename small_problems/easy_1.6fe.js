@@ -43,6 +43,7 @@ DATA STRUCTURE/ALGORITHM
 
 function calculateSum(inputArray) {
   let total = 0;
+  Array.from(inputArray);
   console.log(`getArray: ${getArray}`);
   let highestNum = inputArray.reduce((a, b) => Math.max(a, b), -Infinity);
   for (let i = 1; i <= highestNum; i++) {
