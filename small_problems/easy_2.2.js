@@ -28,22 +28,49 @@ HELLO BOB. WHY ARE WE SCREAMING?
 
 DATA STRUCTURE/ALGORITHM
 
-// require readlineSync module
-// write an if statement to check for input cases
-  // if input does not include exclamation mark
-    // log greeting in sentence case
-  // otherwise
-    // log greeting in upper case
+// solution #1 
 
+// require readlineSync module
+// ask for user's name
+// write an if statement to check for input cases
+  // if input does not include exclamation mark using String.prototype.includes
+    // replace the character with an empty string using replace method
+    // log shout greet
+  // otherwise
+    // log normal greet
+
+// solution #2
+
+// require readlineSync module
+// ask for user's name
+// write an if statement to check for input cases
+  // if last character of input is exclamation mark
+    // remove the character using slice method
+    // log the shouting greet
+  // otherwise, log the normal greet
 */
 
-const inquire = require(`readline-sync`);
-let getName = inquire.question(`What is your name?\n`);
-let exclamationMark = '!';
+// solution #1
 
-if (getName) {
-  console.log(`Hello ${getName}`);
-} else if (getName.includes(exclamationMark)) {
-  console.log('true');
-  // console.log(`HELLO ${getName.toUpperCase()}. WHY ARE WE SCREAMING?`);
-}
+// const inquire = require(`readline-sync`);
+// let getName = inquire.question(`What is your name?\n`);
+// let exclamationMark = '!';
+// let modifiedName = getName.replace('!', '');
+
+// if (getName.includes(exclamationMark)) {
+//   console.log(`HELLO ${modifiedName.toUpperCase()}. WHY ARE WE SCREAMING?`);
+// } else {
+//   console.log(`Hello ${getName}`);
+// }
+
+// solution #2
+
+// const readlineSync = require(`readline-sync`);
+// let name = readlineSync.question(`What is your name?\n`);
+
+// if (name[name.length - 1] === `!`) {
+//   name = name.slice(0, -1);
+//   console.log(`HELLO ${name.toUpperCase()}. WHY ARE WE SCREAMING?`);
+// } else {
+//   console.log(`Hello ${name}`);
+// }
