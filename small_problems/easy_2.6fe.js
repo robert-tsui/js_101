@@ -59,6 +59,8 @@ DATA STRUCTURE/ALGORITHM
 
 */
 
+// solution #1
+
 function findMiddleWord(wordsArray, counter) {
   let output;
 
@@ -120,3 +122,23 @@ console.log(
   penultimate('word word word word') ===
     "Oops. Can't find the middle word in your sentence."
 ); // logs true
+
+// solution #2
+
+function penultimate(str) {
+  let arr = str.split(' ');
+  if (arr.length < 2 || arr.length % 2 === 0) return false;
+  let middleIndex = Math.floor(arr.length / 2);
+  return arr[middleIndex];
+}
+
+console.log(
+  penultimate('nine word sentence one two three four five six') === 'two'
+); // logs true
+console.log(penultimate('seven word sentence one two three four') === 'one'); // logs true
+console.log(penultimate('three word sentence') === 'word'); // logs true
+console.log(penultimate('five word sentence one two') === 'sentence'); // logs true
+console.log(penultimate('') === false); // logs true
+console.log(penultimate(' ') === false); // logs true
+console.log(penultimate('word') === false); // logs true
+console.log(penultimate('word word word word') === false); // logs true
