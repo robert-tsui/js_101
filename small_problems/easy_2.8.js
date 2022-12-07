@@ -37,7 +37,7 @@ function oddities(arr) {
     oddArr.push(arr[i]);
   }
 
-  return newArr;
+  return oddArr;
 }
 
 // function evens(arr) {

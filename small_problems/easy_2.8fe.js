@@ -37,7 +37,7 @@ DATA STRUCTURE/ALGORITHM
 //     oddArr.push(arr[i]);
 //   }
 
-//   return newArr;
+//   return oddArr;
 // }
 
 function evens(arr) {
@@ -47,6 +47,15 @@ function evens(arr) {
   });
 
   return evensArr;
+}
+
+function evens(arr) {
+  let newArr = [];
+  newArr = arr.filter(function (el, idx) {
+    if (idx % 2 === 1) return true;
+  });
+
+  return newArr;
 }
 
 console.log(evens([2, 3, 4, 5, 6])); // logs [3, 5]
