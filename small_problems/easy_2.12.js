@@ -60,32 +60,46 @@ Algorithm
 // return result
 */
 
-function signedIntegerToString(num) {
-  switch (Math.sign(num)) {
-    case 1:
-      console.log('1');
-      return '+' + integerToString(num);
-    case -1:
-      console.log('2');
-      return `-` + integerToString(num * -1);
-    case 0:
-      console.log('3');
-      return integerToString(num);
+// solution #1
+
+// function signedIntegerToString(num) {
+//   switch (Math.sign(num)) {
+//     case 1:
+//       console.log('1');
+//       return '+' + integerToString(num);
+//     case -1:
+//       console.log('2');
+//       return `-` + integerToString(num * -1;);
+//     case 0:
+//       console.log('3');
+//       return integerToString(num);
+//   }
+// }
+
+// function integerToString(num) {
+//   // console.log(`num: ${num}`);
+//   const DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+//   let result = '';
+//   do {
+//     let remainder = num % 10;
+//     num = Math.floor(num / 10);
+//     result = DIGITS[remainder] + result;
+//   } while (num > 0);
+
+//   return result;
+// }
+
+// solution #2
+
+let signedIntegerToString = (num) => {
+  if (Math.sign(num) === 1) {
+    return `+${num}`;
+  } else if (Math.sign(num) === -1) {
+    return `${num}`;
+  } else {
+    return `${num}`;
   }
-}
-
-function integerToString(num) {
-  // console.log(`num: ${num}`);
-  const DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  let result = '';
-  do {
-    let remainder = num % 10;
-    num = Math.floor(num / 10);
-    result = DIGITS[remainder] + result;
-  } while (num > 0);
-
-  return result;
-}
+};
 
 console.log(signedIntegerToString(4321) === '+4321');
 console.log(signedIntegerToString(-123) === '-123');
