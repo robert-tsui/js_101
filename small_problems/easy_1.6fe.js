@@ -43,9 +43,13 @@ DATA STRUCTURE/ALGORITHM
 
 function calculateSum(inputArray) {
   let total = 0;
-  Array.from(inputArray);
-  console.log(`getArray: ${getArray}`);
-  let highestNum = inputArray.reduce((a, b) => Math.max(a, b), -Infinity);
+  let arrOfIntegers = [];
+  for (let i = 0; i < inputArray.length; i++) {
+    arrOfIntegers.push(inputArray[i]);
+    console.log(typeof arrOfIntegers);
+    console.log(`arrOfIntegers: ${arrOfIntegers}`);
+  }
+  let highestNum = arrOfIntegers.reduce((a, b) => Math.max(a, b), -Infinity);
   for (let i = 1; i <= highestNum; i++) {
     total += i;
   }
@@ -57,9 +61,11 @@ function calculateSum(inputArray) {
 
 function calculateProduct(inputArray) {
   let total = 1;
-  inputArray.split(' ');
-  console.log(`inputArray: ${inputArray}`);
-  let highestNum = inputArray.reduce((a, b) => Math.max(a, b), -Infinity);
+  let arrOfIntegers = [];
+  for (let i = 0; i < inputArray.length; i++) {
+    arrOfIntegers.push(inputArray[i]);
+  }
+  let highestNum = arrOfIntegers.reduce((a, b) => Math.max(a, b), -Infinity);
   for (let i = 1; i <= highestNum; i++) {
     total *= i;
   }
@@ -69,17 +75,19 @@ function calculateProduct(inputArray) {
   );
 }
 
-let readlineSync = require(`readline-sync`);
-let getArray = readlineSync.question(`Please enter a few integers:\n`);
-console.log(typeof getArray);
-console.log(`getArray: ${getArray}`);
-let getOperand = readlineSync.question(
-  `Enter "s" to compute the sum, or "p" to compute the product between 1 and the maximum element in your array.\n`
-);
-if (getOperand === 's') {
-  calculateSum(getArray);
-} else if (getOperand === 'p') {
-  calculateProduct(getArray);
-} else {
-  console.log(`Oops. Unknown operation.`);
+function sumProductOfIntegers() {
+  let readlineSync = require(`readline-sync`);
+  let getIntegers = readlineSync.question(`Please enter a few integers:\n`);
+  let getOperand = readlineSync.question(
+    `Enter "s" to compute the sum, or "p" to compute the product between 1 and the maximum element in your array.\n`
+  );
+  if (getOperand === 's') {
+    calculateSum(getIntegers);
+  } else if (getOperand === 'p') {
+    calculateProduct(getIntegers);
+  } else {
+    console.log(`Oops. Unknown operation.`);
+  }
 }
+
+sumProductOfIntegers();
