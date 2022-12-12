@@ -76,6 +76,7 @@ function calculateProduct(inputArray) {
 }
 
 function sumProductOfIntegers() {
+  // added main function to separate from helper functions
   let readlineSync = require(`readline-sync`);
   let getIntegers = readlineSync.question(`Please enter a few integers:\n`);
   let getOperand = readlineSync.question(
