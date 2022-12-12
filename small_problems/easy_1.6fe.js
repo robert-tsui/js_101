@@ -57,6 +57,8 @@ function calculateSum(inputArray) {
 
 function calculateProduct(inputArray) {
   let total = 1;
+  inputArray.split(' ');
+  console.log(`inputArray: ${inputArray}`);
   let highestNum = inputArray.reduce((a, b) => Math.max(a, b), -Infinity);
   for (let i = 1; i <= highestNum; i++) {
     total *= i;
@@ -68,7 +70,7 @@ function calculateProduct(inputArray) {
 }
 
 let readlineSync = require(`readline-sync`);
-let getArray = readlineSync.question(`Please enter an array of integers:\n`);
+let getArray = readlineSync.question(`Please enter a few integers:\n`);
 console.log(typeof getArray);
 console.log(`getArray: ${getArray}`);
 let getOperand = readlineSync.question(
