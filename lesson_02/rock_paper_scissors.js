@@ -84,19 +84,8 @@ function prompt(msg) {
   console.log(`=> ${msg}`);
 }
 
-while (true) {
-  prompt(`Make your move: ${VALID_MOVES.join(' ')}`);
-  let userMove = RL.question().toLowerCase();
-
-  while (!VALID_MOVES.includes(userMove)) {
-    console.log(`That's not a valid choice.\nChoose between ${VALID_MOVES}.`);
-    userMove = RL.question();
-  }
-
-  let randomIndex = Math.floor(Math.random() * VALID_MOVES.length);
-  let computerMove = VALID_MOVES[randomIndex];
-
-  console.log(`Your move is ${userMove}. Computer's move is ${computerMove}.`);
+function howToWin(userMove, computerMove) {
+  prompt(`Your move is ${userMove}. Computer's move is ${computerMove}.`);
 
   if (
     (userMove === `scissors` && computerMove === `paper`) ||
@@ -113,9 +102,27 @@ while (true) {
   } else {
     prompt(`It's a tie!`);
   }
+}
 
+while (true) {
+  prompt(`Make your move: ${VALID_MOVES.join(' ')}`);
+  let userMove = RL.question().toLowerCase();
+
+  while (!VALID_MOVES.includes(userMove)) {
+    console.log(`That's not a valid choice.\nChoose between ${VALID_MOVES}.`);
+    userMove = RL.question();
+  }
+
+  // let randomIndex = Math.floor(Math.random() * VALID_MOVES.length);
+  // let randomIndex = Math.ceil(Math.random() * VALID_MOVES.length - 1);
+  let randomIndex = Math.round(Math.random() * VALID_MOVES.length - 1);
+  console.log(`randomIndex: ${randomIndex}`);
+  let computerMove = VALID_MOVES[randomIndex];
+
+  howToWin(userMove, computerMove);
+  let playAgain;
   prompt(`Want to play again? (y/n)`);
-  let playAgain = RL.question().toLowerCase();
+  playAgain = RL.question().toLowerCase();
 
   while (playAgain[0] !== `y` && playAgain[0] !== `n`) {
     prompt(`Please enter "y" or "n"`);
