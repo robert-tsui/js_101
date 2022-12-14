@@ -103,8 +103,8 @@ function howToWin(userMove, computerMove) {
     prompt(`It's a tie!`);
   }
 }
-
-while (true) {
+let playAgain;
+do {
   prompt(`Make your move: ${VALID_MOVES.join(' ')}`);
   let userMove = RL.question().toLowerCase();
 
@@ -116,11 +116,8 @@ while (true) {
   // let randomIndex = Math.floor(Math.random() * VALID_MOVES.length);
   // let randomIndex = Math.ceil(Math.random() * VALID_MOVES.length - 1);
   let randomIndex = Math.round(Math.random() * VALID_MOVES.length - 1);
-  console.log(`randomIndex: ${randomIndex}`);
   let computerMove = VALID_MOVES[randomIndex];
-
   howToWin(userMove, computerMove);
-  let playAgain;
   prompt(`Want to play again? (y/n)`);
   playAgain = RL.question().toLowerCase();
 
@@ -129,7 +126,7 @@ while (true) {
     playAgain = RL.question().toLowerCase();
   }
 
-  if (playAgain !== `y`) {
-    break;
-  }
-}
+  // if (playAgain !== `y`) {
+  //   break;
+  // }
+} while (playAgain !== `n`);
