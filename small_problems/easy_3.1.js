@@ -52,21 +52,79 @@ The HOW you're going to get to input from output
 // return newStr
 */
 
-function crunch(str) {
-  let newStr = '';
-  for (let i = 0; i < str.length; i++) {
-    if (str[i] === str[i - 1]) {
-      continue;
-    } else {
-      newStr += str[i];
-    }
-  }
+// my solution
 
-  return newStr;
+// function crunch(str) {
+//   let newStr = '';
+//   for (let i = 0; i < str.length; i++) {
+//     if (str[i] === str[i - 1]) {
+//       continue;
+//     } else {
+//       newStr += str[i];
+//     }
+//   }
+
+//   return newStr;
+// }
+
+// LS solution
+
+// function crunch(text) {
+//   let index = 0;
+//   let crunchText = '';
+
+//   while (index <= 100) {
+//     if (text[index] !== text[index + 1]) {
+//       crunchText += text[index];
+//       console.log(`crunchText: ${crunchText}`);
+//     }
+
+//     index += 1;
+//   }
+
+//   return crunchText;
+// }
+
+// solution #3
+
+// let crunch = (str) => {
+//   let strArr = [];
+//   for (let i = 0; i < str.length; i++) {
+//     let currentChar = str[i];
+//     let previousChar = str[i - 1];
+//     if (currentChar === previousChar) {
+//       continue;
+//     } else {
+//       strArr.push(str[i]);
+//     }
+//   }
+
+//   return strArr.join('');
+// };
+
+// solution #4
+
+function crunch(str) {
+  let areDoubles;
+
+  do {
+    areDoubles = false;
+
+    for (let i = 0; i < str.length - 1; i += 1) {
+      if (str[i] === str[i + 1]) {
+        areDoubles = true;
+        toReplace = str[i] + str[i];
+        str = str.replace(toReplace, str[i]);
+      }
+      if (areDoubles) break;
+    }
+  } while (areDoubles);
+
+  return str;
 }
 
 console.log(crunch('ddaaiillyy ddoouubbllee')); // "daily double"
-console.log(crunch('4444abcabccba')); // "4abcabcba"
-console.log(crunch('ggggggggggggggg')); // "g"
-console.log(crunch('a')); // "a"
-console.log(crunch('')); // ""
+console.log(crunch('4444abcabccba')); // "4abcabcba" // 13 // text.length = 13 // text.length - 1 = 12
+// console.log(crunch('ggggggggggggggg')); // "g"
+// console.log(crunch('a')); // "a"
+// console.log(crunch('')); // ""
