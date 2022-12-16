@@ -9,6 +9,23 @@
 // log result of calculation
 // prompt the user to calculate again
 
+// notes for improvement:
+
+// clarify whether the program expects a percent format or a decimal format
+// disallow negative values for the loan amount, the APR and the loan duration
+// disallow 0 for the loan amount and the loan duration
+// allow decimal values for APR
+// accept loan durations in months instead of years - some loans are specified in terms of 30 month durations
+// change the descriptive name `messages` for the `messages` function to something like `getMessage`
+// change the descriptive name `userLanguage` to something like `chooseLanguage`
+// extract the action of reporting the final calculation to its own function
+// extract to their own functions
+// choosing a user's language
+// getting / validating a user's loan amount
+// getting / validating an interest rate
+// getting / validating a loan duration
+// asking the user if they want to run another calculation
+
 // const variables
 const READLINE = require(`readline-sync`);
 const MESSAGES = require('./calculator_messages.json');
@@ -17,7 +34,8 @@ const MESSAGES = require('./calculator_messages.json');
 prompt(messages('preferredLang', 'en'));
 prompt(messages('preferredLang', 'fr'));
 
-// prompt user input for desired language and returns a valid input ('en' or 'fr')
+// prompt user input for desired language
+// and returns a valid input ('en' or 'fr')
 let userLang = READLINE.question();
 userLang = userLanguage(userLang, requestInput);
 
