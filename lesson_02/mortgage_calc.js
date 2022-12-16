@@ -11,96 +11,61 @@
 
 // notes for improvement:
 
-// clarify whether the program expects a percent format or a decimal format
-// disallow negative values for the loan amount, the APR and the loan duration
-// disallow 0 for the loan amount and the loan duration
-// allow decimal values for APR
+// clarify whether the program expects a percent format or a decimal format / done
+// disallow negative values for the loan amount, the APR and the loan duration / done
+// disallow 0 for the loan amount and the loan duration / done
+// allow decimal values for APR / done
+// change the descriptive name `messages` for the `messages` function to something like `getMessage` / done
+// change the descriptive name `userLanguage` to something like `chooseLanguage` / done
+// extract the action of reporting the final calculation to its own function / done
+// extract to their own functions / done
+// choosing a user's language / done
+// getting / validating a user's loan amount / done
+// getting / validating an interest rate / done
+// getting / validating a loan duration / done
+// asking the user if they want to run another calculation / done
 // accept loan durations in months instead of years - some loans are specified in terms of 30 month durations
-// change the descriptive name `messages` for the `messages` function to something like `getMessage`
-// change the descriptive name `userLanguage` to something like `chooseLanguage`
-// extract the action of reporting the final calculation to its own function
-// extract to their own functions
-// choosing a user's language
-// getting / validating a user's loan amount
-// getting / validating an interest rate
-// getting / validating a loan duration
-// asking the user if they want to run another calculation
 
 // const variables
 const READLINE = require(`readline-sync`);
 const MESSAGES = require('./calculator_messages.json');
 
-// select user language (french and english)
-prompt(messages('preferredLang', 'en'));
-prompt(messages('preferredLang', 'fr'));
+// function invocation to prompt user to select language
+getUserLanguage();
 
 // prompt user input for desired language
 // and returns a valid input ('en' or 'fr')
 let userLang = READLINE.question();
-userLang = userLanguage(userLang, requestInput);
+userLang = validateLanguage(userLang, requestInput);
+console.clear();
 
 // welcomes user
-prompt(messages('welcome', userLang));
-while (true) {
-  // prompts user for loan amount and retrieves valid number
-  prompt(messages('loanAmount', userLang));
-  let userLoanAmt = READLINE.question();
-  while (invalidNumber(userLoanAmt)) {
-    prompt(messages('incorrect', userLang));
-    userLoanAmt = READLINE.question();
-  }
+prompt(getMessages('welcome', userLang));
 
-  // prompts user for APR and retrieves valid percentage as a whole number
-  prompt(messages('APR', userLang));
-  let userAPR = READLINE.question();
-  while (invalidPercentage(userAPR)) {
-    prompt(messages('incorrect2', userLang));
-    userAPR = READLINE.question();
-  }
-
-  // prompts user for loan duration in years and retrieves valid input
-  prompt(messages('loanDuration', userLang));
-  let userLoanDurationInYears = READLINE.question();
-  while (invalidNumber(userLoanDurationInYears)) {
-    prompt(messages('incorrect', userLang));
-    userLoanDurationInYears = READLINE.question();
-  }
-
-  // calculator function invocation
-  calculateMortgageLoan(userLoanAmt, userAPR, userLoanDurationInYears);
-
-  // prompts user to perform additional calculations and retrieves valid input
-  prompt(messages('calculateAgain', userLang));
-  let calculateMortgageLoanAgain = READLINE.question();
-  while (!['1', '2'].includes(calculateMortgageLoanAgain)) {
-    prompt(messages('mustChoose2', userLang));
-    calculateMortgageLoanAgain = READLINE.question();
-  }
-  if (calculateMortgageLoanAgain !== '1') {
-    prompt(messages('thankYou2', userLang));
-    break;
-  }
-  if (calculateMortgageLoanAgain === '1') {
-    prompt(messages('again2', userLang));
-    console.clear();
-  }
-}
+// start calculator
+mortgageCalculator();
 
 // function to log marker
 function prompt(message) {
   console.log(`=> ${message}`);
 }
 
+// function to select user language (french and english)
+function getUserLanguage() {
+  prompt(getMessages('preferredLang', 'en'));
+  prompt(getMessages('preferredLang', 'fr'));
+}
+
 // function to retrieve messages from json file
-function messages(message, userLang = 'en') {
+function getMessages(message, userLang = 'en') {
   return MESSAGES[userLang][message];
 }
 
 // function to retrieve valid language input
-function userLanguage(userLang, cb) {
+function validateLanguage(userLang, cb) {
   while (userLang !== 'en' && userLang !== 'fr') {
     userLang = cb(
-      messages('validLang', 'en') + '\n' + messages('validLang', 'fr')
+      getMessages('validLang', 'en') + '\n' + getMessages('validLang', 'fr')
     );
   }
 
@@ -118,9 +83,58 @@ function invalidNumber(num) {
   return num.trimStart() === '' || Number.isNaN(Number(num));
 }
 
-// function to check for invalid percentage as a whole number
-function invalidPercentage(num) {
-  return num.trimStart() === '' || Number.isNaN(Number(num)) || num % 1 !== 0;
+function zeroNumber(num) {
+  return Number(num) === 0;
+}
+
+// function to check for negative number
+function negNumber(num) {
+  return Math.sign(num) === -1;
+}
+
+// function to prompt user for desired loan amount
+function getLoanAmount(userLang) {
+  // prompts user for loan amount and retrieves valid number
+  prompt(getMessages('loanAmount', userLang));
+  let userLoanAmt = READLINE.question();
+  while (
+    invalidNumber(userLoanAmt) ||
+    negNumber(userLoanAmt) ||
+    zeroNumber(userLoanAmt)
+  ) {
+    prompt(getMessages('incorrect', userLang));
+    userLoanAmt = READLINE.question();
+  }
+
+  return userLoanAmt;
+}
+
+function getApr(userLang) {
+  // prompts user for APR and retrieves valid percentage as a whole number
+  prompt(getMessages('APR', userLang));
+  let userAPR = READLINE.question();
+  while (negNumber(userAPR) || invalidNumber(userAPR)) {
+    prompt(getMessages('incorrect2', userLang));
+    userAPR = READLINE.question();
+  }
+
+  return userAPR;
+}
+
+function getLoanDuration(userLang) {
+  // prompts user for loan duration in years and retrieves valid input
+  prompt(getMessages('loanDuration', userLang));
+  let userLoanDurationInYears = READLINE.question();
+  while (
+    invalidNumber(userLoanDurationInYears) ||
+    negNumber(userLoanDurationInYears) ||
+    zeroNumber(userLoanDurationInYears)
+  ) {
+    prompt(getMessages('incorrect', userLang));
+    userLoanDurationInYears = READLINE.question();
+  }
+
+  return userLoanDurationInYears;
 }
 
 // function to convert APR to monthly interest and loan duration to months
@@ -137,6 +151,56 @@ function calculateMortgageLoan(userLoanAmt, userAPR, userLoanDurationInYears) {
       (monthlyInterestRate /
         (1 - Math.pow(1 + monthlyInterestRate, -userLoanDurationInMonths)));
   }
-  prompt(messages(`monthlyPayment`, userLang)) +
-    console.log(`$${monthlyPayment.toFixed(2)}`);
+
+  return monthlyPayment;
+}
+
+// function to display monthly payment
+function displayMonthlyPayment(getPayment, userLang) {
+  prompt(getMessages(`monthlyPayment`, userLang));
+  console.log(`$${getPayment.toFixed(2)}`);
+}
+
+// function to prompt user to calculate again and retrieve valid input
+function getAnotherPayment(userLang) {
+  prompt(getMessages('calculateAgain', userLang));
+  let calculateMortgageLoanAgain = READLINE.question();
+  while (!['1', '2'].includes(calculateMortgageLoanAgain)) {
+    prompt(getMessages('mustChoose2', userLang));
+    calculateMortgageLoanAgain = READLINE.question();
+  }
+
+  if (calculateMortgageLoanAgain !== '1') {
+    prompt(getMessages('thankYou2', userLang));
+  }
+  if (calculateMortgageLoanAgain === '1') {
+    prompt(getMessages('again2', userLang));
+    console.clear();
+    mortgageCalculator();
+  }
+}
+
+// function to start the calculator function invocations
+function mortgageCalculator() {
+  // function invocation to prompt user for desired loan amount
+  let userLoanAmt = getLoanAmount(userLang);
+
+  // function invocation to prompt user for APR
+  let userAPR = getApr();
+
+  // function invocation to prompt user for loan duration
+  let userLoanDurationInYears = getLoanDuration();
+
+  // function invocation to calculate monthly payment
+  let calculateMonthlyPayment = calculateMortgageLoan(
+    userLoanAmt,
+    userAPR,
+    userLoanDurationInYears
+  );
+
+  // function invocation to display monthly payment
+  displayMonthlyPayment(calculateMonthlyPayment);
+
+  // function invocation to calculate again and retrieve valid input
+  getAnotherPayment();
 }
