@@ -31,7 +31,7 @@ const READLINE = require(`readline-sync`);
 const MESSAGES = require('./calculator_messages.json');
 
 // function invocation to prompt user to select language
-getUserLanguage();
+chooseLanguage();
 
 // prompt user input for desired language
 // and returns a valid input ('en' or 'fr')
@@ -45,13 +45,29 @@ prompt(getMessages('welcome', userLang));
 // start calculator
 mortgageCalculator();
 
+// function invocation to prompt user to calculate again
+// retrieves and returns valid input
+// invokes function if user chooses yes
+while (true) {
+  let calculateMortgageLoanAgain = getAnotherPayment();
+
+  if (calculateMortgageLoanAgain !== `1`) {
+    prompt(getMessages('thankYou2', userLang));
+    break;
+  } else if (calculateMortgageLoanAgain === `1`) {
+    prompt(getMessages('again2', userLang));
+    console.clear();
+    mortgageCalculator();
+  }
+}
+
 // function to log marker
 function prompt(message) {
   console.log(`=> ${message}`);
 }
 
 // function to select user language (french and english)
-function getUserLanguage() {
+function chooseLanguage() {
   prompt(getMessages('preferredLang', 'en'));
   prompt(getMessages('preferredLang', 'fr'));
 }
@@ -170,14 +186,7 @@ function getAnotherPayment(userLang) {
     calculateMortgageLoanAgain = READLINE.question();
   }
 
-  if (calculateMortgageLoanAgain !== '1') {
-    prompt(getMessages('thankYou2', userLang));
-  }
-  if (calculateMortgageLoanAgain === '1') {
-    prompt(getMessages('again2', userLang));
-    console.clear();
-    mortgageCalculator();
-  }
+  return calculateMortgageLoanAgain;
 }
 
 // function to start the calculator function invocations
@@ -200,7 +209,4 @@ function mortgageCalculator() {
 
   // function invocation to display monthly payment
   displayMonthlyPayment(calculateMonthlyPayment);
-
-  // function invocation to calculate again and retrieve valid input
-  getAnotherPayment();
 }
