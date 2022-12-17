@@ -8,6 +8,19 @@ Rules:
 - If player a chooses paper and player b chooses rock, player a wins.
 - If player a chooses scissors and player b chooses paper, player a wins.
 - If both players choose the same item, neither player wins. It's a tie.
+New Rules:
+- If player a choose scissors and player b chooses paper, player a wins
+- If player a choose paper and player b chooses rock, player a wins
+- If player a choose rock and player b chooses lizard, player a wins
+- If player a choose lizard and player b chooses spock, player a wins
+- If player a choose spock and player b chooses scissors, player a wins
+- If player a choose scissors and player b chooses lizard, player a wins
+- If player a choose lizard and player b chooses paper, player a wins
+- If player a choose paper and player b chooses spock, player a wins
+- If player a choose spock and player b chooses rock, player a wins
+- If player a choose rock and player b chooses scissors, player a wins
+- If both players choose the same item, neither player wins. It's a tie.
+
 
 Examples and Test Cases
 =========================
@@ -78,25 +91,71 @@ The HOW you're going to get to input from output
 */
 
 const RL = require(`readline-sync`);
-const VALID_MOVES = ['rock', 'paper', 'scissors'];
+const VALID_MOVES = ['r', 'p', 'sc', `sp`, `l`];
+const DISPLAY_VALID_MOVES = {
+  r: 'rock',
+  p: 'paper',
+  sc: 'scissors',
+  sp: 'spock',
+  l: 'lizard',
+};
 
 function prompt(msg) {
   console.log(`=> ${msg}`);
 }
 
-function howToWin(userMove, computerMove) {
-  prompt(`Your move is ${userMove}. Computer's move is ${computerMove}.`);
+function computeGrandWinner() {
+  // declare a variable to hold the count for the number of times user won
+  // declare a variable to hold the count for the number of times computer won
+  // write an if statement to check if user wins or computer wins are equal to 3
+  // if yes, return `grandWinner`
+}
 
+function howToWin(userMove, computerMove) {
+  console.log(typeof userMove);
+  // declare a variable `displayUserMove`
+  // declare a variable `displayComputerMove`
+  let displayUserMove;
+  let displayComputerMove;
+  // iterate over `displayvalidmoves`
+  for (const key in DISPLAY_VALID_MOVES) {
+    // if `userMove` is equal to the key of `displayvalidmoves`
+    if (userMove === key) {
+      // reassign `displayUserMove` to the key's corresponding value of `displayvalidmoves`
+      displayUserMove = DISPLAY_VALID_MOVES[key];
+    }
+    if (computerMove === key) {
+      // reassign `displayComputerMove` to the key's corresponding value of `displayvalidmoves`
+      displayComputerMove = DISPLAY_VALID_MOVES[key];
+    }
+  }
+  prompt(
+    `Your move is ${displayUserMove}. Computer's move is ${displayComputerMove}.`
+  );
   if (
-    (userMove === `scissors` && computerMove === `paper`) ||
-    (userMove === `paper` && computerMove === `rock`) ||
-    (userMove === `rock` && computerMove === `scissors`)
+    (userMove === `sc` && computerMove === `p`) ||
+    (userMove === `p` && computerMove === `r`) ||
+    (userMove === `r` && computerMove === `l`) ||
+    (userMove === `l` && computerMove === `sp`) ||
+    (userMove === `sp` && computerMove === `sc`) ||
+    (userMove === `sc` && computerMove === `l`) ||
+    (userMove === `l` && computerMove === `p`) ||
+    (userMove === `p` && computerMove === `sp`) ||
+    (userMove === `sp` && computerMove === `r`) ||
+    (userMove === `r` && computerMove === `sc`)
   ) {
     prompt(`You won!`);
   } else if (
-    (computerMove === `scissors` && userMove === `paper`) ||
-    (computerMove === `paper` && userMove === `rock`) ||
-    (computerMove === `rock` && userMove === `scissors`)
+    (userMove === `p` && computerMove === `sc`) ||
+    (userMove === `r` && computerMove === `p`) ||
+    (userMove === `l` && computerMove === `r`) ||
+    (userMove === `sp` && computerMove === `l`) ||
+    (userMove === `sc` && computerMove === `sp`) ||
+    (userMove === `l` && computerMove === `sc`) ||
+    (userMove === `p` && computerMove === `l`) ||
+    (userMove === `sp` && computerMove === `p`) ||
+    (userMove === `r` && computerMove === `sp`) ||
+    (userMove === `sc` && computerMove === `r`)
   ) {
     prompt(`Computer won!`);
   } else {
@@ -105,11 +164,19 @@ function howToWin(userMove, computerMove) {
 }
 let playAgain;
 do {
-  prompt(`Make your move: ${VALID_MOVES.join(' ')}`);
+  prompt(
+    `Type the first letter of your chosen move ("sp" for spock, "sc" for scissors): ${Object.values(
+      DISPLAY_VALID_MOVES
+    ).join(' ')}`
+  );
   let userMove = RL.question().toLowerCase();
 
   while (!VALID_MOVES.includes(userMove)) {
-    console.log(`That's not a valid choice.\nChoose between ${VALID_MOVES}.`);
+    console.log(
+      `That's not a valid choice.\nEnter the first letter of your move between ${Object.values(
+        DISPLAY_VALID_MOVES
+      ).join(', ')}. ("sp" for spock, "sc" for scissors)`
+    );
     userMove = RL.question();
   }
 
@@ -125,8 +192,4 @@ do {
     prompt(`Please enter "y" or "n"`);
     playAgain = RL.question().toLowerCase();
   }
-
-  // if (playAgain !== `y`) {
-  //   break;
-  // }
 } while (playAgain !== `n`);
