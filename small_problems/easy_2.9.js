@@ -1,83 +1,53 @@
-/* 
+// Build a program that randomly generates Teddy's age,
+// and logs it to the console.
+// Have the age be a random number between 20 and 120 (inclusive).
 
-INPUTS AND OUTPUTS
+/*
+Understanding the [P]roblem
+===========================
+Input: 
+- none
 
-i: String of numeric characters
-o: Number as integer
+Output: 
+- Number
 
-EXPLICIT REQUIREMENTS  
-- no methods allowed
-- assume numeric characters
-- assume no + or - signs
+Rules:
+- age must be between 20 and 120 (inclusive)
+- age must be an integer?
 
-MENTAL MODEL
-convert the string of numeric characters into an integer without using methods
+[E]xamples and Test Cases
+=========================
+1. Validate or invalidate what we wrote for input/output/rules
+2. Look for implicit requirements
 
-EXAMPLES/TEST CASES
-console.log(stringToInteger("4321") === 4321); // logs true
-console.log(stringToInteger("570") === 570); // logs true
+- Teddy is 69 years old!
 
-DATA STRUCTURE/ALGORITHM
-// use a for loop to iterate over string
-// return the characters
+
+-- Intermission --
+
+[D]ata Structure
+================
+- Do I need an array or an object for my solution?
+
+[A]lgorithm
+===========
+- written in plain english
+- language agnostic - not naming specific methods and syntax
+
+- generate a random number between 0 and 1
+- multiply the floating point number by the range of possible values between the min and max of the age range
+- round this number down to the nearest integer
+- add this number to the min of the age range to shift the number into the range 
+- assign return value to a variable `age`
+- return age
+
 */
-// solution #1
+function findAge(min, max) {
+  let age = Math.floor(Math.random() * (max - min)) + min;
 
-// function stringToInteger(str) {
-//   const DIGITS = {
-//     0: 0,
-//     1: 1,
-//     2: 2,
-//     3: 3,
-//     4: 4,
-//     5: 5,
-//     6: 6,
-//     7: 7,
-//     8: 8,
-//     9: 9,
-//   };
+  return age;
+}
 
-//   let newArr = str.split('').map((el) => DIGITS[el]);
-//   let value = 0;
-//   newArr.forEach((el) => (value = value * 10 + el));
-//   return value;
-// }
+let teddysAge = findAge(20, 120);
 
-// Solution #3
-// function stringToInteger(str) {
-//   return str * 1;
-// }
-
-// solution #4
-
-let stringToInteger = (str) => {
-  const DIGITS = {
-    0: 0,
-    1: 1,
-    2: 2,
-    3: 3,
-    4: 4,
-    5: 5,
-    6: 6,
-    7: 7,
-    8: 8,
-    9: 9,
-  };
-  let numArray = str.split('').map(function (el) {
-    return DIGITS[el];
-  });
-  console.log(`numArray; ${numArray}`);
-  let number = 0;
-  let power = numArray.length - 1;
-  for (let i = 0; i < numArray.length; i++) {
-    number += numArray[i] * 10 ** power;
-    console.log(`number: ${number}`);
-    power -= 1;
-  }
-
-  return number;
-};
-
-console.log(stringToInteger('4321'));
-console.log(stringToInteger('4321') === 4321); // logs true
-console.log(stringToInteger('570') === 570); // logs true
+console.log(`Teddy's age is ${teddysAge} years old!`);
