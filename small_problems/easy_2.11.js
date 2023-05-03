@@ -1,124 +1,125 @@
-/* 
-Understanding the problem
+// Write a function that takes a non-empty string argument and returns the middle character(s) of the string.
+// If the string has an odd length, you should return exactly one character.
+// If the string has an even length, you should return exactly two characters.
 
+/*
+Understanding the [P]roblem
 ===========================
-I: Number
-O: String
-Rules: 
-- integers are non-negative
-- may not use standard conversion functions (String(), Number.prototype.toString, '' + number)
-- converts integer to string representation of that integer
+Input:
+- string
+Output:
+- string
+Rules:
+- argument is non-empty string
+- string is not case-sensitive
+- a string with even length returns one character
+- a string with odd length returns two characters
+- a string with one character returns itself
 
-Examples and Test Cases
-
+[E]xamples and Test Cases
 =========================
+1. Validate or invalidate what we wrote for input/output/rules
+2. Look for implicit requirements
 
-1) Use the test cases to confirm your understanding of the problem thus far
-2) Taking a look at the test cases to see if there are implied (implicit) requirements, that weren't explicitly stated in the problem statement
-
-integerToString(4321);        // "4321"
-integerToString(0);           // "0"
-integerToString(5000);        // "5000"
-integerToString(1234567890);  // "1234567890"
+centerOf('I Love JavaScript'); // "a"
+centerOf('Launch School');     // " "
+centerOf('Launch');            // "un"
+centerOf('Launchschool');      // "hs"
+centerOf('x');                 // "x"
 
 
 -- Intermission --
+length: 5 
+string t u r b o 
+index  0 1 2 3 4
+center     *
 
-Do I have a mental model?
+length: 7 
+string t u r b o o o
+index  0 1 2 3 4 5 6
+center       *
 
-Mental model: WHAT you have to do in order to get from input to output
-// use an object to hold integers as keys
-// and their corresponding string representations as values. 
-// hold the numbers in an array and map them to their string represented equivalents
-// reduce the array elements and return the result
+length: 9
+string t u r b o o o o o
+index  0 1 2 3 4 5 6 7 8
+center         *
 
-Data Structure
+length: 5 center index: (5 - 1) / 2 => 2
+length: 7 center index: (7 - 1) / 2 => 3
+length: 9 center index: (9 - 1) / 2 => 4
 
+length: 2
+string t u 
+index  0 1
+center * *
+
+length: 4
+string t u r b 
+index  0 1 2 3
+center   * *
+
+length: 6
+string t u r b o o
+index  0 1 2 3 4 5
+center     * *
+
+length: 2 center index: right index: (2 / 2) => 1, left index: (right index - 1) 
+length: 4 center index: right index: (4 / 2) => 2, left index: (right index - 1) 
+length: 6 center index: right index: (6 / 2) => 3, left index: (right index - 1) 
+
+[D]ata Structure
 ================
+- Do I need an array or an object for my solution? array
 
-- an object to hold the numbers to compare the positions to the input numbers
-- an array to hold the input numbers to manipulate 
-
-Algorithm
-
+[A]lgorithm
 ===========
+- written in plain english
+- language agnostic - not naming specific methods and syntax
 
-// Failed algorithm (couldn't convert number to array for manipulation without converting to string first)
-
-The HOW you're going to get to input from output
-
-// declare a variable DIGITS and assign to an object with the base ten numerals as keys and their string representations as values
-// declare a variable numArr and assign to an empty array to hold the input integer
-// declare a variable str and assign to an empty string to hold the string result
-// map each number from input array to string in object
-// split numbers in array into new empty array
-// concatenate each element from new array to empty string
-// return str
-
-// second attempt
-
-// declare a variable DIGITS as a lookup table and assign to an array with the base ten numerals as string values
-// declare a variable numArr and assign to an empty array to hold the input integer
-// declare a variable str and assign to an empty string to hold the string result
-// split the number into the empty array
-// map each number from array to indexed string in lookup table
-// concatenate each element from new array to empty string
-// return str
-
-// LS solution recall
-// declare a variable DIGITS to be used as a lookup table and assign to an array of base 10 numerals represented as strings
-// create a loop to separate individual digits from the input integer
-// declare a variable remainder and assign to the evaluated result of getting the remainder from dividing integer by 10
-// assign number to the evaluated result of dividing integer by 10
-// declare a variable result and use the remainder to assign to the corresponding index in the lookup table
-// set a condition that the integer is greater than 0
-// return result
+// if string length is odd
+  // return substring at n-1 / 2
+// if string length is even
+  // return substrings at n / 2, (n / 2) - 1
 */
 
-function integerToString(num) {
-  const DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  let result = '';
-  do {
-    let remainder = num % 10;
-    num = Math.floor(num / 10);
-    result = DIGITS[remainder] + result;
-  } while (num > 0);
+// function centerOf(str) {
+//   let rightIndex = str.length / 2;
+//   let leftIndex = rightIndex - 1;
+//   let middleIndex = (str.length - 1) / 2;
 
-  return result;
-}
-
-console.log(integerToString(4321)); // "4321"
-console.log(integerToString(0)); // "0"
-console.log(integerToString(5000)); // "5000"
-console.log(integerToString(1234567890)); // "1234567890"
-
-// function integerToString(num) {
-//   const DIGITS = {
-//     0: '0',
-//     1: '1',
-//     2: '2',
-//     3: '3',
-//     4: '4',
-//     5: '5',
-//     6: '6',
-//     7: '7',
-//     8: '8',
-//     9: '9',
-//   };
-//   let numArr = [];
-//   let str = '';
-//   arr.map(function (el, idx) {
-//     numArr.push(DIGITS[el]);
-//   });
-//   for (let i = 0; i < numArr.length; i++) {
-//     console.log(`str: ${str}`);
-//     str += numArr[i];
+//   if (str.length % 2 === 0) {
+//     return str.substring(leftIndex, rightIndex + 1);
+//   } else if (str.length % 2 === 1) {
+//     return str.substring(middleIndex, middleIndex + 1);
 //   }
-//   console.log(typeof str);
-//   return str;
 // }
 
-// console.log(integerToString(4321)); // "4321"
-// integerToString(0); // "0"
-// integerToString(5000); // "5000"
-// integerToString(1234567890); // "1234567890"
+// ls
+
+// function centerOf(str) {
+//   if (str.length % 2 === 1) {
+//     let centerIndex = (str.length - 1) / 2;
+//     return str[centerIndex];
+//   } else {
+//     let leftIndex = str.length / 2 - 1;
+//     return str.substring(leftIndex, leftIndex + 2);
+//   }
+// }
+
+// student
+function centerOf(str) {
+  let middleIndex = (str.length - 1) / 2;
+
+  if (str.length % 2 === 0) {
+    let rightIndex = middleIndex + 1;
+    return str.substring(middleIndex, rightIndex + 1);
+  } else {
+    return str[middleIndex];
+  }
+}
+
+console.log(centerOf('I Love JavaScript')); // "a"
+console.log(centerOf('Launch School')); // " "
+console.log(centerOf('Launch')); // "un"
+console.log(centerOf('Launchschool')); // "hs"
+console.log(centerOf('x')); // "x"

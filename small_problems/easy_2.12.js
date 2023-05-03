@@ -1,106 +1,61 @@
-/* 
-Understanding the problem
+// Write a function that takes a number as an argument.
+// If the argument is a positive number, return the negative of that number.
+// If the argument is a negative number, return it as-is.
 
+/*
+Understanding the [P]roblem
 ===========================
-I: Number
-O: String
-Rules: 
-- integers are non-negative
-- may not use standard conversion functions (String(), Number.prototype.toString, '' + number)
-- converts integer to string representation of that integer
+Input: 
+- number
 
-Examples and Test Cases
+Output:
+- number
 
+Rules:
+1. return negative number if argument is positive
+2. return negative number if argument is negative
+3. if number is not a whole number?
+4. if number is 0, #1
+
+[E]xamples and Test Cases
 =========================
+1. Validate or invalidate what we wrote for input/output/rules
+2. Look for implicit requirements
 
-1) Use the test cases to confirm your understanding of the problem thus far
-2) Taking a look at the test cases to see if there are implied (implicit) requirements, that weren't explicitly stated in the problem statement
-
-integerToString(4321);        // "4321"
-integerToString(0);           // "0"
-integerToString(5000);        // "5000"
-integerToString(1234567890);  // "1234567890"
-
+negative(5);     // -5
+negative(-3);    // -3
+negative(0);     // -0
 
 -- Intermission --
 
-Do I have a mental model?
+5 => -5
+100 => -100
+-100 => -100
+0 => -0
 
-Mental model: WHAT you have to do in order to get from input to output
-// use an array object to hold array of base 10 numerals represented as strings
-// check if input number has a leading sign and return the helper function
-
-Data Structure
-
+[D]ata Structure
 ================
+- Do I need an array or an object for my solution? no
 
-- an object to hold the numbers to compare the positions to the input numbers
-- an array to hold the input numbers to manipulate 
-
-Algorithm
-
+[A]lgorithm
 ===========
+- written in plain english
+- language agnostic - not naming specific methods and syntax
 
-// LS solution recall
-
-// declare a function signedIntegerToString
-// check if input number is positive or negative
-// if positive, return the '+` sign concatenated with invoking the helper function with string as argument 
-// if positive, return the '-` sign concatenated with invoking the helper function with string multiplied by -1 as argument 
-// if zero or -zero, return the the string as argument for helper function invocation
-
-// declare a helper function integerToString
-// return the helper function for each leading sign
-// declare a variable DIGITS to be used as a lookup table and assign to an array of base 10 numerals represented as strings
-// create a loop to separate individual digits from the input integer
-// declare a variable remainder and assign to the evaluated result of getting the remainder from dividing integer by 10
-// assign number to the evaluated result of dividing integer by 10
-// declare a variable result and use the remainder to assign to the corresponding index in the lookup table
-// set a condition that the integer is greater than 0
-// return result
+// if number is greater than or equal to 0 
+  // return -number
+// if number is less than 0
+ // return number
 */
 
-// solution #1
-
-// function signedIntegerToString(num) {
-//   switch (Math.sign(num)) {
-//     case 1:
-//       console.log('1');
-//       return '+' + integerToString(num);
-//     case -1:
-//       console.log('2');
-//       return `-` + integerToString(num * -1;);
-//     case 0:
-//       console.log('3');
-//       return integerToString(num);
-//   }
+// function negative(num) {
+//   return num >= 0 ? -num : num;
 // }
 
-// function integerToString(num) {
-//   // console.log(`num: ${num}`);
-//   const DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-//   let result = '';
-//   do {
-//     let remainder = num % 10;
-//     num = Math.floor(num / 10);
-//     result = DIGITS[remainder] + result;
-//   } while (num > 0);
+function negative(num) {
+  return num >= 0 ? num * -1 : num;
+}
 
-//   return result;
-// }
-
-// solution #2
-
-let signedIntegerToString = (num) => {
-  if (Math.sign(num) === 1) {
-    return `+${num}`;
-  } else if (Math.sign(num) === -1) {
-    return `${num}`;
-  } else {
-    return `${num}`;
-  }
-};
-
-console.log(signedIntegerToString(4321) === '+4321');
-console.log(signedIntegerToString(-123) === '-123');
-console.log(signedIntegerToString(0) === '0');
+console.log(negative(5)); // -5
+console.log(negative(-3)); // -3
+console.log(negative(0)); // -0
