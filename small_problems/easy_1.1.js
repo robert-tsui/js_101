@@ -49,3 +49,8 @@ console.log(isOdd(-17));
 console.log(isOdd(-8));
 console.log(isOdd(0));
 console.log(isOdd(7));
+
+
+[[1, 2], [3, 4]].map(arr => {
+  console.log(arr[0]);
+}
