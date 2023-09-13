@@ -7,15 +7,7 @@ Input: number
 
 Output: log asterisks
 
-star(7);
-// logs
-*  *  *
- * * *
-  ***
-*******
-  ***
- * * *
-*  *  *
+Example: 
 
 star(9);
 // logs
@@ -35,28 +27,46 @@ Rules:
 - every output displays an 8 pointed star
 - each pointed star aligns with the same pattern for the first and last row/columns of stars
 - there are n rows in the output
-- the midrow = Math.ceil(n / 2), which has n stars
+- the `midRow` = Math.ceil(n / 2), which has n stars
 - every row except midrow has 3 stars each
-- the upper half of rows
-  - 1st star => starts at 1, increments by 1, until it reaches less than midrow 
-  - 2nd star => midrow stars
-  - 3rd star => starts at n, decrements by 1, until it reaches midrow
-- the lower half of rows
-  - 1st star => starts at midrow - 1, decrements by 1 until it reaches 1
-  - 2nd star => midrow stars
-  - 3rd star => starts at midrow + 1, increments by 1 until it reaches n
 
+Mental Model:
+- loop the upper half of rows
+  - 1st row -> `startingSpaces` = 0, `middleSpaces` = `midRow` - 2
+  - every row thereafter -> `startingSpaces` += 1, `middleSpaces` -= 1
+
+- reassign `startingSpaces` = `midRow` - 2 and `middleSpaces` = 0
+
+- loop the lower half of rows
+  - 1st row -> `startingSpaces` = `midRow` - 2, `middleSpaces` = 0
+  - every row thereafter -> `startingSpaces` -= 1, `middleSpaces` += 1
+
+START
 SET star = '*'
 SET midRow = Math.ceil(n / 2)
 SET row = 1
 SET column = 1
+SET startingSpaces = 1;
+SET middleSpaces = midRow - 2;
 
-FOR loop until row <= n
+FOR loop until row < midRow
+  IF row === 1
+    PRINT star first then separated by spaces and stars
+  IF row > 1
+    PRINT space first then separated by stars and spaces
   INCREMENT row += 1
-  FOR loop until column <= n
-    PRINT stars (`column` `star` + `midRow` `star` + `n` `star`)
-    INCREMENT column += 1
 
+PRINT midRow stars
+
+SET startingSpaces = midRow - 2;
+SET middleSpaces = 0;
+
+FOR loop until row < midRow
+  PRINT space first then separated by stars and spaces
+  INCREMENT row += 1
+  DECREMENT startingSpaces -= 1;
+  INCREMENT middleSpaces += 1;
+END
 */
 
 function star(n) {
@@ -110,15 +120,3 @@ function star(n) {
 console.log(star(7));
 console.log(star(9));
 // console.log(star(21));
-// logs
-/*
-1, 5, 9
-2, 5, 8
-3, 5, 7
-4, 5, 6
-1, 2, 3, 4, 5, 6, 7, 8, 9
-4, 5, 6
-3, 5, 7
-2, 5, 8
-1, 5, 9
- */
