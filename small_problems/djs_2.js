@@ -1,3 +1,5 @@
+// forEach returns undefined, even if you have a return statement in the callback function
+
 const RESERVED_KEYWORDS = [
   'break',
   'case',
