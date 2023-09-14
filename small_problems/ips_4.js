@@ -69,54 +69,96 @@ FOR loop until row < midRow
 END
 */
 
-function star(n) {
-  let star = '*';
-  let space = ' ';
-  let midRow = Math.ceil(n / 2);
-  let startingSpaces = 1;
-  let middleSpaces = midRow - 2;
+// function star(n) {
+//   let star = '*';
+//   let space = ' ';
+//   let midRow = Math.ceil(n / 2);
+//   let startingSpaces = 1;
+//   let middleSpaces = midRow - 2;
 
-  for (let row = 1; row < midRow; row += 1) {
-    if (row === 1) {
-      console.log(
-        star +
-          space.repeat(middleSpaces) +
-          star +
-          space.repeat(middleSpaces) +
-          star
-      );
-    }
-    if (row > 1) {
-      middleSpaces -= 1;
-      console.log(
-        space.repeat(startingSpaces) +
-          star +
-          space.repeat(middleSpaces) +
-          star +
-          space.repeat(middleSpaces) +
-          star
-      );
-      startingSpaces += 1;
-    }
+//   for (let row = 1; row < midRow; row += 1) {
+//     if (row === 1) {
+//       console.log(
+//         star +
+//           space.repeat(middleSpaces) +
+//           star +
+//           space.repeat(middleSpaces) +
+//           star
+//       );
+//     }
+//     if (row > 1) {
+//       middleSpaces -= 1;
+//       console.log(
+//         space.repeat(startingSpaces) +
+//           star +
+//           space.repeat(middleSpaces) +
+//           star +
+//           space.repeat(middleSpaces) +
+//           star
+//       );
+//       startingSpaces += 1;
+//     }
+//   }
+//   console.log(star.repeat(n));
+//   startingSpaces = midRow - 2;
+//   middleSpaces = 0;
+
+//   for (let row = 1; row < midRow; row += 1) {
+//     console.log(
+//       space.repeat(startingSpaces) +
+//         star +
+//         space.repeat(middleSpaces) +
+//         star +
+//         space.repeat(middleSpaces) +
+//         star
+//     );
+//     startingSpaces -= 1;
+//     middleSpaces += 1;
+//   }
+// }
+
+// console.log(star(7));
+// console.log(star(9));
+// console.log(star(21));
+
+// LS attempt
+function buildStarRow(spacesBetween, spacesPadding) {
+  let starArr = ['*', '*', '*'];
+  let starStr = starArr.join(' '.repeat(spacesBetween));
+  return ' '.repeat(spacesPadding) + starStr;
+}
+
+function star(size) {
+  let spacesBetween = (size - 3) / 2;
+  let spacesPadding = 0;
+  let middleIdx = Math.floor(size / 2);
+
+  // first row up to middle row
+  for (let idx = 0; idx < middleIdx; idx++) {
+    // console.log(`idx: `, idx);
+    // console.log(`spacesBetween: `, spacesBetween);
+    // console.log(`spacesPadding: `, spacesPadding);
+    console.log(buildStarRow(spacesBetween, spacesPadding));
+    spacesBetween = spacesBetween - 1;
+    spacesPadding = spacesPadding + 1;
   }
-  console.log(star.repeat(n));
-  startingSpaces = midRow - 2;
-  middleSpaces = 0;
+  // middle row
+  console.log('*'.repeat(size));
+  spacesBetween = 0;
+  spacesPadding = (size - 3) / 2;
+  // console.log(`spacesBetween: `, spacesBetween);
+  // console.log(`spacesPadding: `, spacesPadding);
 
-  for (let row = 1; row < midRow; row += 1) {
-    console.log(
-      space.repeat(startingSpaces) +
-        star +
-        space.repeat(middleSpaces) +
-        star +
-        space.repeat(middleSpaces) +
-        star
-    );
-    startingSpaces -= 1;
-    middleSpaces += 1;
+  // middle row up to last row
+  for (let idx = 0; idx < middleIdx; idx++) {
+    // console.log(`spacesBetween: `, spacesBetween);
+    // console.log(`spacesPadding: `, spacesPadding);
+    console.log(buildStarRow(spacesBetween, spacesPadding));
+    spacesBetween = spacesBetween + 1;
+    spacesPadding = spacesPadding - 1;
   }
 }
 
-console.log(star(7));
-console.log(star(9));
-// console.log(star(21));
+star(7);
+star(9);
+star(25);
